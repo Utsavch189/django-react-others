@@ -4,6 +4,7 @@ from core.utils.decorators.handelException import handel_exception
 from core.utils.decorators.query_parser import query_parser
 from src.api.selector.bookSelector import BookSelector
 from src.api.service.bookService import BookService
+from core.utils.decorators.schemaValidate import schema_validate
 
 class BookControllerApi(APIView):
 
@@ -14,6 +15,7 @@ class BookControllerApi(APIView):
         return Response(data=message,status=status)
     
     @query_parser(query_collections=[],path='/api/v1/book')
+    @schema_validate(schema_name='book_add_schema.json')
     @handel_exception
     def post(self,request,query_dict:dict):
         message,status=BookService.create(data=request.data)
