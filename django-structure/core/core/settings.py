@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import datetime
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -138,3 +138,38 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_ALLOW_ALL=False
 APPEND_SLASH=True
+
+LOGGING ={
+    'version':1,
+    "disable_existing_loggers": False,
+    'loggers':{
+        'success':{
+            'handlers':['success_file'],
+            'level':'INFO'
+        },
+        'error':{
+            'handlers':['error_file'],
+            'level':'ERROR'
+        }
+    },
+    'handlers':{
+        'success_file':{
+            'class': 'logging.FileHandler',
+            'filename':'./logs/success/'+str(datetime.date.today())+'.log',
+            'formatter':'simpleRe',
+        },
+        'error_file':{
+            'class': 'logging.FileHandler',
+            'filename':'./logs/error/'+str(datetime.date.today())+'.log',
+            'formatter':'simpleRe',
+        }
+    },
+    'formatters':{
+        'simpleRe': {
+            'format': '{levelname} : [{asctime} {lineno:d} {process:d} {thread:d} {message}]',
+            'datefmt' : "%d/%b/%Y %H:%M:%S",
+            'style': '{',
+        }
+
+    }
+}
