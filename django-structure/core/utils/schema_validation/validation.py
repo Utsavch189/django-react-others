@@ -9,7 +9,7 @@ class SchemaValidate:
     
     def __get_schema(self):
         try:
-            with open(f'{settings.BASE_DIR}/utils/schemas/{self.json_file}', 'r') as file:
+            with open(f'{settings.BASE_DIR}/utils/schema_validation/schemas/{self.json_file}', 'r') as file:
                 schema = json.load(file)
             return schema
         except Exception as e:
@@ -21,6 +21,7 @@ class SchemaValidate:
             try:
                 jsonschema.validate(instance=self.request_data, schema=execute_api_schema)
             except jsonschema.exceptions.ValidationError as err:
+                print(err)
                 return False
             except Exception as e:
                 return False

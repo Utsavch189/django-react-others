@@ -1,1 +1,4 @@
 ERROR : [16/Jan/2024 00:36:49 22 12328 12644 package : src.api.controller.bookController --> position : BookControllerApi.get --> exception : book does not exists!]
+ERROR : [16/Jan/2024 20:30:12 22 6288 3328 package : src.api.controller.bookController --> position : BookControllerApi.get --> exception : book does not exists!]
+ERROR : [16/Jan/2024 20:30:15 22 6288 3328 package : src.api.controller.bookController --> position : BookControllerApi.get --> exception : book does not exists!]
+ERROR : [16/Jan/2024 21:17:16 22 10028 13816 package : src.api.controller.authController --> position : AuthControllerApi.post --> exception : wrong user_id!]

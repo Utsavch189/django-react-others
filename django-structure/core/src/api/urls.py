@@ -1,6 +1,7 @@
 from django.urls import path,re_path
 from src.api.controller.authorCotroller import AuthorControllerApi
 from src.api.controller.bookController import BookControllerApi
+from src.api.controller.authController import AuthControllerApi
 
 AUTHOR_URL='^author(?:\?author-id=[a-zA-Z0-9_-]+(?:\?page=[a-zA-Z0-9_-]&page-size=[a-zA-Z0-9_-]))?' 
 """
@@ -39,5 +40,6 @@ BOOK_URL='^book(?:\?book-id=[a-zA-Z0-9_-]+(?:\?page=[a-zA-Z0-9_-]&page-size=[a-z
 
 urlpatterns = [
     re_path(rf'{AUTHOR_URL}',AuthorControllerApi.as_view()),
-    re_path(rf'{BOOK_URL}',BookControllerApi.as_view())
+    re_path(rf'{BOOK_URL}',BookControllerApi.as_view()),
+    path('login',AuthControllerApi.as_view())
 ]

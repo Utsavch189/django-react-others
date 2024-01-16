@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from datetime import datetime
 from rest_framework import status
-from utils.validation import SchemaValidate
+from utils.schema_validation.validation import SchemaValidate
 
 def schema_validate(schema_name:str):
     def inner(func):
