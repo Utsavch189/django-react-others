@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" name="" id="files">
+</body>
+<script>
+    const elm=document.getElementById("files");
+    elm.addEventListener("change",(e)=>{
+        e.preventDefault();
+        const file=e.target.files[0];
+        const formdata=new FormData();
+        formdata.append("pic",file);
+        formdata.append("name","Sanu");
+        formdata.append("username","san87");
+        fetch("http://localhost:8000/api/v1/files/",{
+            body:formdata,
+            method:"POST"
+        })
+        .then(res=>res.json())
+        .then(data=>console.log(data))
+    })
+</script>
+</html>
