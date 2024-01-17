@@ -1,0 +1,12 @@
+[run]
+source=src.api
+omit=
+    */tests/*
+    */migrations/*
+    */__init__.py
+
+[report]
+omit=
+    */tests/*
+    */migrations/*
+    */__init__.py

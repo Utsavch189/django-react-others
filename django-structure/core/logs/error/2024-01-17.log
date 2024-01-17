@@ -1,0 +1,1 @@
+ERROR : [17/Jan/2024 18:30:53 22 3656 3100 package : src.api.controller.bookController --> position : BookControllerApi.get --> exception : book does not exists!]
