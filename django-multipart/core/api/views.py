@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from .serializers import PeopleSerializer
 from .models import People
 import base64
-from django.conf import settings
 
 class ApiController(APIView):
 
@@ -28,14 +27,18 @@ class ApiController(APIView):
             print(type(str(file.read())))  # <class 'str'>
 
             """
-            base_64_encode=base64.b64encode(file.read())
-            with open('encode.txt','wb') as f:
-                f.write(base_64_encode)
+                
             if serializer.is_valid():
                 serializer.save()
+                try:
+                    base_64_encode=base64.b64encode(file.read()) # get file's base64 encoded string
+                except Exception as e:
+                    print(str(e))
+                
                 return Response({"message":"created!","user":serializer.data},status=status.HTTP_201_CREATED)
             else:
                 return Response({"message":serializer.errors},status=status.HTTP_400_BAD_REQUEST)
+            
         except Exception as e:
             print(str(e))
             return Response({"message":str(e)},status=status.HTTP_400_BAD_REQUEST)
