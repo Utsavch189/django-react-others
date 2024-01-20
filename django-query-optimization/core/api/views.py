@@ -26,8 +26,9 @@ class AuthorApiView(APIView):
 
 class BookApiView(APIView):
 
-    def get(self,request,author_id):
+    def get(self,request,book_id):
         try:
-            return Response({"data":""},status=status.HTTP_200_OK)
+            data=BookSelector.normal_a_book_with_its_author(book_id=book_id)
+            return Response({"data":data},status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"message":str(e)},status=status.HTTP_400_BAD_REQUEST)
