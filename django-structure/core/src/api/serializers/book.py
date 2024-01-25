@@ -2,6 +2,7 @@ from rest_framework import serializers
 from src.api.models import Book,Author
 from src.api.serializers.book_meta import BookMetaOutputSerializer,BookMetaInputSerializer
 from benedict  import benedict
+from utils.exceptions import main
 
 class BookOutputSerializer(serializers.ModelSerializer):
     book_meta=BookMetaOutputSerializer(many=False)
@@ -40,7 +41,7 @@ class BookInputSerializer(serializers.Serializer):
             if not value:
                 raise Exception("while updating you must pass book_id...")
             if not Book.objects.filter(book_id=value).exists():
-                raise Exception("book does not exists!")
+                raise main.NotExists(detail="book doesn't exists",code=400)
         if self.creation:
             if value:
                 raise Exception('no need to pass book_id while create!')

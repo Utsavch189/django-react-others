@@ -12,15 +12,15 @@ class BookControllerApi(APIView):
 
     permission_classes=[IsAuthorized]
 
-    @query_parser(query_collections=[['book-id'],['page','page-size']],path='/api/v1/book')
-    @handel_exception(log=True)
+    #@query_parser(query_collections=[['book-id'],['page','page-size']],path='/api/v1/book')
+    #@handel_exception(log=True)
     def get(self,request)->Response:
         message,status=BookSelector.get(query_dict=request.query_params)
         return Response(data=message,status=status)
     
     @query_parser(query_collections=[],path='/api/v1/book')
     @schema_validate(schema_name='book_add_schema.json')
-    @handel_exception(log=True)
+    #@handel_exception(log=True)
     def post(self,request):
         message,status=BookService.create(data=request.data)
         return Response(data=message,status=status)

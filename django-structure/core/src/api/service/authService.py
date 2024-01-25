@@ -2,6 +2,7 @@ from rest_framework import status
 from utils.jwt.main import JwtBuilder
 from src.api.models import Author
 
+
 class AuthorService:
 
     @staticmethod

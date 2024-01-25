@@ -1,8 +1,4 @@
-import re
 from django.http import HttpResponseNotFound
-from rest_framework.response import Response
-from datetime import datetime
-from rest_framework import status
 
 def query_parser(query_collections:list[list]=None,path=''):
     def inner(func):
@@ -27,7 +23,6 @@ def query_parser(query_collections:list[list]=None,path=''):
                 else:
                     return func(*args, **kwargs)
             except Exception as e:
-                print(e)
-                return Response({"message":"Internal Server Error","timestamp":datetime.timestamp(datetime.now())},status=status.HTTP_500_INTERNAL_SERVER_ERROR) 
+                return Exception("Internal Server Error!") 
         return wrapper
     return inner
