@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from .models import Customer,Order
 from django.db.models import Sum,Avg,Count
+from django.db.models import F
 
 
 def index(request):
@@ -63,6 +64,50 @@ def index(request):
     #print(res)
 
 
+    # --------------------- Annotate -----------------------
+
+    """
+    In Django, annotate() is a QuerySet method that allows you 
+    to add annotations to each item in the queryset.
+    These annotations can be aggregations, calculations, 
+    or any other type of additional data you want to attach to each item.
+    The result is that each item in the queryset will have an additional 
+    attribute, which is the result of the annotation.
+    """
+
+    # Basic Annotation: Adding a calculated field to each Order object.
+    orders_with_total = Order.objects.annotate(
+        total_amount=F('quant') * F('amount')
+    )
+    for i in orders_with_total:
+        """
+        utsav   40
+        utsav   270
+        mritunjay   4950
+        """
+        #print(i.customer.name,' ',i.total_amount)
+    
+
+    orders_with_total = Order.objects.filter(customer__customer_id=1).annotate(
+        total_amount=F('quant') * F('amount')
+    )
+    for i in orders_with_total:
+        """
+        utsav   40
+        utsav   270
+        """
+        #print(i.customer.name,' ',i.total_amount)
+    
+    customers_with_total_orders = Order.objects.annotate(
+        total_orders=Sum('quant')
+    )
+    for i in customers_with_total_orders:
+        """
+        utsav   2
+        utsav   3
+        mritunjay   9
+        """
+        #print(i.customer.name,' ',i.total_orders)
     
 
 
