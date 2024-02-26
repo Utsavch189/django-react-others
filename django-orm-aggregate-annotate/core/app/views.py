@@ -30,7 +30,13 @@ def index(request):
     #c1=Customer.objects.values_list()
     #print(c1) # returns a list of tuples <QuerySet [(1, 'utsav'), (2, 'poushali'), (3, 'mritunjay')]>
 
-    #    Aggregates : 
+    #c1=Customer.objects.values_list(flat=True)
+    #print(c1) # by default returns a list primary key's <QuerySet [1, 2, 3]>
+
+    #c1=Customer.objects.values_list('name',flat=True)
+    #print(c1) # returns a list of names <QuerySet ['utsav', 'poushali', 'mritunjay']>
+
+    # --------------------   Aggregates ---------------------------
 
     """
     This method is used to perform an aggregate function 
@@ -41,7 +47,19 @@ def index(request):
     """
 
     # Find Total order amount for a customer
-    res=Order.objects.filter(customer__customer_id=1).aggregate(total_amount=Sum('amount'))
+    res=Order.objects.filter(customer__customer_id=1).aggregate(total_amount=Sum('amount')) # customer__customer_id=1 means customer field of Order table which is a foreign key and refers to Customer Table and __customer_id means customer_id field of that Customer Table.
+    print(res)
+
+    # Find Total order quant for a customer
+    res=Order.objects.filter(customer__customer_id=1).aggregate(total_quant=Sum('quant'))
+    print(res)
+
+    # Find Average order amount for a customer
+    res=Order.objects.filter(customer__customer_id=1).aggregate(avg_amount=Avg('amount')) 
+    print(res)
+
+    # Find Total number of a customer
+    res=Order.objects.filter(customer__customer_id=1).count()
     print(res)
 
 
